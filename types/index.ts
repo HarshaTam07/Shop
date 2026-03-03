@@ -52,6 +52,7 @@ export interface Transaction {
   computedTotal: number;
   finalTotal: number;
   customAmount?: number;
+  debtPayment?: { customerName: string; amount: number };
   paidAmount?: number;
   status?: "PAID" | "PARTIAL";
 }

@@ -108,26 +108,32 @@ export default function ReceiptModal({ transaction, onClose }: ReceiptModalProps
                 <span>CART TOTAL:</span>
                 <span>₹{transaction.finalTotal.toFixed(2)}</span>
               </div>
+              {transaction.debtPayment && transaction.debtPayment.amount > 0 && (
+                <div className="flex justify-between text-blue-600">
+                  <span>Debt Payment ({transaction.debtPayment.customerName}):</span>
+                  <span>₹{transaction.debtPayment.amount.toFixed(2)}</span>
+                </div>
+              )}
               {transaction.customAmount && transaction.customAmount > 0 && (
-                <>
-                  <div className="flex justify-between text-purple-600">
-                    <span>Custom Amount:</span>
-                    <span>₹{transaction.customAmount.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between text-base font-bold border-t border-gray-400 pt-2 mt-2">
-                    <span>GRAND TOTAL:</span>
-                    <span>₹{(transaction.finalTotal + transaction.customAmount).toFixed(2)}</span>
-                  </div>
-                </>
+                <div className="flex justify-between text-purple-600">
+                  <span>Custom Amount:</span>
+                  <span>₹{transaction.customAmount.toFixed(2)}</span>
+                </div>
+              )}
+              {((transaction.debtPayment && transaction.debtPayment.amount > 0) || (transaction.customAmount && transaction.customAmount > 0)) && (
+                <div className="flex justify-between text-base font-bold border-t border-gray-400 pt-2 mt-2">
+                  <span>GRAND TOTAL:</span>
+                  <span>₹{(transaction.finalTotal + (transaction.debtPayment?.amount || 0) + (transaction.customAmount || 0)).toFixed(2)}</span>
+                </div>
               )}
               <div className="flex justify-between">
                 <span>Paid:</span>
                 <span className="font-semibold">₹{(transaction.paidAmount ?? transaction.finalTotal).toFixed(2)}</span>
               </div>
-              {(transaction.paidAmount ?? transaction.finalTotal) < (transaction.finalTotal + (transaction.customAmount || 0)) && (
+              {(transaction.paidAmount ?? transaction.finalTotal) < (transaction.finalTotal + (transaction.debtPayment?.amount || 0) + (transaction.customAmount || 0)) && (
                 <div className="flex justify-between text-orange-600 font-semibold">
                   <span>Balance Due:</span>
-                  <span>₹{((transaction.finalTotal + (transaction.customAmount || 0)) - (transaction.paidAmount ?? transaction.finalTotal)).toFixed(2)}</span>
+                  <span>₹{((transaction.finalTotal + (transaction.debtPayment?.amount || 0) + (transaction.customAmount || 0)) - (transaction.paidAmount ?? transaction.finalTotal)).toFixed(2)}</span>
                 </div>
               )}
               <div className="flex justify-between">

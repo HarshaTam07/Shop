@@ -87,6 +87,10 @@ export default function CartPage() {
       computedTotal,
       finalTotal,
       customAmount: customAmountValue > 0 ? customAmountValue : undefined,
+      debtPayment: selectedDebt && debtPayment > 0 ? { 
+        customerName: selectedDebt.customerName, 
+        amount: debtPayment 
+      } : undefined,
       paidAmount: cartPayment,
       status: cartPayment < finalTotal ? "PARTIAL" : "PAID",
     };
