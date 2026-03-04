@@ -91,8 +91,8 @@ export default function CartPage() {
         customerName: selectedDebt.customerName, 
         amount: debtPayment 
       } : undefined,
-      paidAmount: cartPayment,
-      status: cartPayment < finalTotal ? "PARTIAL" : "PAID",
+      paidAmount: paid,
+      status: paid < grandTotal ? "PARTIAL" : "PAID",
     };
 
     createTransaction(transaction);

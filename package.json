@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/HarshaTam07/Shop#readme",
   "dependencies": {
+    "@supabase/supabase-js": "^2.98.0",
     "@types/node": "^25.3.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

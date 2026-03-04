@@ -23,10 +23,18 @@ export default function ItemsPage() {
   const filteredItems = useMemo(() => {
     return items.filter((item) => {
       const searchLower = searchQuery.toLowerCase();
+      
+      // Enhanced search to include weight, category, type, sizeType, price, and stock matching
       const matchesSearch =
         !searchQuery ||
         item.name.toLowerCase().includes(searchLower) ||
-        item.metaNames.some((meta) => meta.toLowerCase().includes(searchLower));
+        item.metaNames.some((meta) => meta.toLowerCase().includes(searchLower)) ||
+        (item.weight && item.weight.toLowerCase().includes(searchLower)) ||
+        (item.category && item.category.toLowerCase().includes(searchLower)) ||
+        (item.type && item.type.toLowerCase().includes(searchLower)) ||
+        (item.sizeType && item.sizeType.toLowerCase().includes(searchLower)) ||
+        item.amount.toString().includes(searchQuery) ||
+        item.quantity.toString().includes(searchQuery);
 
       const matchesWeight = !filterWeight || item.weight === filterWeight;
       const matchesCategory = !filterCategory || item.category === filterCategory;

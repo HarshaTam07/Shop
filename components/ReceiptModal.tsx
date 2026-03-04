@@ -138,8 +138,14 @@ export default function ReceiptModal({ transaction, onClose }: ReceiptModalProps
               )}
               <div className="flex justify-between">
                 <span>Status:</span>
-                <span className={`font-semibold ${(transaction.status === "PAID" || !transaction.paidAmount) ? "text-green-600" : "text-orange-600"}`}>
-                  {transaction.status || "PAID"}
+                <span className={`font-semibold ${
+                  (transaction.paidAmount ?? transaction.finalTotal) >= (transaction.finalTotal + (transaction.debtPayment?.amount || 0) + (transaction.customAmount || 0))
+                    ? "text-green-600" 
+                    : "text-orange-600"
+                }`}>
+                  {(transaction.paidAmount ?? transaction.finalTotal) >= (transaction.finalTotal + (transaction.debtPayment?.amount || 0) + (transaction.customAmount || 0))
+                    ? "PAID"
+                    : "PARTIAL"}
                 </span>
               </div>
             </div>

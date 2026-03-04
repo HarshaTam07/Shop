@@ -4,11 +4,11 @@ import { useEffect } from "react";
 import { useStore } from "@/store/useStore";
 
 export default function StoreInitializer() {
-  const loadFromStorage = useStore((state) => state.loadFromStorage);
+  const loadData = useStore((state) => state.loadData);
 
   useEffect(() => {
-    loadFromStorage();
-  }, [loadFromStorage]);
+    loadData();
+  }, [loadData]);
 
   return null;
 }
