@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import Header from "@/components/Header";
 import { Toaster } from "react-hot-toast";
 import StoreInitializer from "@/components/StoreInitializer";
+import KeepAlive from "@/components/KeepAlive";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <StoreInitializer />
+          <KeepAlive />
           <Header />
           <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
             {children}
